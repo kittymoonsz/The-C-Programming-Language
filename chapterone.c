@@ -3,27 +3,29 @@
 #include <stdio.h>
 
 // Function prototypes
-void func_1_1();   // Print "Hello, world!"
-void func_1_2();   // Print invalid escape sequence demonstration
-void func_1_3();   // Print Fahrenheit to Celsius conversion table
-void func_1_4();   // Print Celsius to Fahrenheit conversion table
-void func_1_5();   // Print Celsius to Fahrenheit conversion table in reverse order
-void func_1_6();   // Check getchar() != EOF
-void func_1_7();   // Print value of EOF
-void func_1_5_3(); // Count number of lines
+void func_1_1();
+void func_1_2();  
+void func_1_3();  
+void func_1_4();  
+void func_1_5();   
+void func_1_6(); 
+void func_1_7();  
+void func_1_5_3(); 
 void func_1_9();
 void func_1_10();
 void func_1_5_4();
 void func_1_11();
 void func_1_12();
 void func_1_13();
+void func_1_14();
+int func_1_15();
 
 // Main function definition
 int main()
 {
-    // Execute the functions
-    func_1_13();
-    // Return 0 to indicate successful completion
+    int celsius = func_1_15(10);
+    printf("%d", celsius);
+    
     return 0;
 }
 
@@ -280,6 +282,7 @@ void func_1_12()
     printf("%d", word);
 }
 
+// Makes a histogram of each word length
 void func_1_13()
 {
 #define IN 1
@@ -295,7 +298,7 @@ void func_1_13()
         if (c == ' ' || c == '\n' || c == '\t')
         {
             if (state == IN)
-            {https://www.youtube.com/watch?v=672ViOcwDco
+            {
                 array_storage[index] = array_length;
                 ++index;
                 state = OUT;
@@ -321,3 +324,38 @@ void func_1_13()
         putchar('\n');
     }
 }
+
+// Makes a histogram of each character frequency
+void func_1_14() {
+    #define ASCII_SIZE 128
+    int c;
+    int frequencies[ASCII_SIZE] = {0};
+
+    while ((c = getchar()) != 'z')
+    {
+        frequencies[c]++;
+    }
+    for (int i = 0; i < ASCII_SIZE; ++i)
+    {
+        if (frequencies[i] > 0)
+        {
+            if (i != ' ' && i != '\n' && i != '\t')
+            {
+                printf("'%c' : %-2d : ", i, frequencies[i]);
+                
+                for (int j = 0; j < frequencies[i]; j++)
+                {
+                    putchar('#');
+                }  
+            }
+            printf("\n");
+        }
+    }
+}
+
+// Tests function parameters call
+int func_1_15(int fahr) {
+    int celsius = (fahr - 32) * 5.0 / 9.0;
+    return celsius;
+}
+
