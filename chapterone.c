@@ -1,6 +1,7 @@
 // Include standard input-output library
 // Provides functions like printf for output to the console
 #include <stdio.h>
+#include <string.h>
 
 // Function prototypes
 void func_1_1();
@@ -19,12 +20,15 @@ void func_1_12();
 void func_1_13();
 void func_1_14();
 int func_1_15();
+void func_1_16();
+char* func_1_17(int min_length, char s[]);
 
 // Main function definition
 int main()
 {
-    int celsius = func_1_15(10);
-    printf("%d", celsius);
+    func_1_16();
+    
+    
     
     return 0;
 }
@@ -359,3 +363,66 @@ int func_1_15(int fahr) {
     return celsius;
 }
 
+// Reads input and print the longest line
+void func_1_16() {
+    #define IN 1
+    #define OUT 0
+    #define MAX_CHARACTERS 100
+    #define MAX_LINES 10
+
+    int c, char_index = 0, line_index = 0;
+    char longest_line[MAX_CHARACTERS] = {0};
+    char longer_line[MAX_CHARACTERS] = {0};
+    int state = OUT;
+    char lines[MAX_LINES][MAX_CHARACTERS] = {{0}};
+
+    while ((c = getchar()) != 'z')
+    {
+        if (c == ' ' || c == '\n' || c == '\t')
+        {
+            if (state == IN)
+            {
+                lines[line_index][char_index] = '\0';
+                if (char_index > strlen(longest_line))
+                {
+                    for (int i = 0; i < char_index; i++)
+                    {
+                        strcpy(longest_line, lines[line_index]);
+                    }  
+                }
+                if (char_index > 3)
+                {
+                    for (int i = 0; i < char_index; i++)
+                    {
+                        strcpy(longer_line, lines[line_index]);
+                    }
+                    
+                }       
+                state = OUT;
+                char_index = 0;
+                line_index++;
+            }  
+        }
+        else
+            {
+                if (state == OUT)
+                {
+                    state = IN;
+                }
+                lines[line_index][char_index++] = c;
+            }
+    }
+    printf("Longest line: %s\n", longest_line);
+    printf("Length of longest line: %d\n", strlen(longest_line));
+    printf("Inputs that are bigger than 10 characters:\n");
+    for (int i = 0; i < line_index; i++) {
+        if (strlen(lines[i]) > 3) {
+            printf("%s\n", (lines[i]));
+        }
+    }
+}
+
+void func_1_20() 
+{
+    int c;
+}
